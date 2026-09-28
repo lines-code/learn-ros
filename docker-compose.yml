@@ -1,0 +1,16 @@
+services:
+  ros2:
+    build: .
+    image: ros2-dev:jazzy
+    container_name: ros2-dev
+    hostname: ros2-dev
+    ports:
+      - "6080:80"        # noVNC 데스크톱 (브라우저에서 http://localhost:6080)
+    volumes:
+      - ./ros2_ws:/home/ubuntu/ros2_ws
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-7}
+      - ROS_LOCALHOST_ONLY=1
+      - RESOLUTION=1920x1080
+    shm_size: "1gb"
+    restart: unless-stopped
